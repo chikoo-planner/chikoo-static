@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <circle cx="30" cy="30" r="26" stroke="#C9913D" stroke-width="1.5"/>
+  <path
+    d="M38 19a14 14 0 1 0 0 22"
+    stroke="#C9913D"
+    stroke-width="2"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <text
+    x="64"
+    y="36"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="20"
+    font-weight="600"
+    letter-spacing="5"
+    fill="#FBF7F0"
+  >CHIKOO</text>
+  <line x1="64" y1="42" x2="196" y2="42" stroke="#C9913D" stroke-width="0.8"/>
+</svg>

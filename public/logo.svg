@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 58" fill="none">
+  <defs>
+    <!-- Diagonal gold stripe pattern — same angle as the K lines in the brand mark -->
+    <pattern id="s" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(-50)">
+      <rect width="6" height="10" fill="#E8A020"/>
+    </pattern>
+  </defs>
+
+  <!-- Layer 1: CHI + OO in white; K is invisible but holds its space -->
+  <text x="2" y="46"
+    font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
+    font-size="46" font-weight="900" letter-spacing="4">
+    <tspan fill="#ffffff">CHI</tspan><tspan fill="none">K</tspan><tspan fill="#ffffff">OO</tspan>
+  </text>
+
+  <!-- Layer 2: K filled with diagonal gold stripes; CHI + OO invisible -->
+  <text x="2" y="46"
+    font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
+    font-size="46" font-weight="900" letter-spacing="4">
+    <tspan fill="none">CHI</tspan><tspan fill="url(#s)">K</tspan><tspan fill="none">OO</tspan>
+  </text>
+</svg>

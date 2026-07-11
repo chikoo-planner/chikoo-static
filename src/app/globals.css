@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Brand palette (CHIKOO teal + gold) ── */
+  --color-brand-900: #0A3245;   /* deepest teal */
+  --color-brand-800: #155272;   /* primary teal — logo background */
+  --color-brand-700: #1E6A95;   /* medium teal */
+  --color-brand-500: #E8A020;   /* gold accent — logo K stripes */
+  --color-brand-300: #F0C870;   /* light gold */
+  --color-brand-100: #E4F0F8;   /* very light teal */
+  --color-cream: #F6FAFB;       /* near-white page background */
+  --color-ink: #0A1F2E;         /* dark navy body text */
+  --color-muted: #5C7E94;       /* blue-gray secondary text */
+
+  /* ── Typography ── */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: Inter, system-ui, sans-serif;
+}
+
+:root {
+  --background: #F6FAFB;
+  --foreground: #0A1F2E;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}

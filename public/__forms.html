@@ -1,0 +1,19 @@
+<!--
+  Static fallback so Netlify's build-time form parser reliably detects these
+  forms (which are otherwise rendered by client components). This page is
+  never linked to or visited by users.
+-->
+<!doctype html>
+<html>
+<body>
+  <form name="newsletter" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="email" name="email" />
+  </form>
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <textarea name="message"></textarea>
+  </form>
+</body>
+</html>
