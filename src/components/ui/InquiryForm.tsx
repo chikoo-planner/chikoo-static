@@ -19,10 +19,11 @@ export default function InquiryForm() {
 
     const name = String(data.get("name") || "").trim()
     const email = String(data.get("email") || "").trim()
+    const phone = String(data.get("phone") || "").trim()
     const message = String(data.get("message") || "").trim()
 
-    if (!name || !/^\S+@\S+\.\S+$/.test(email) || message.length < 10) {
-      setError("Please fill in your name, a valid email, and a message of at least 10 characters.")
+    if (!name || !/^\S+@\S+\.\S+$/.test(email) || !/^[+\d][\d\s-]{6,}$/.test(phone) || message.length < 10) {
+      setError("Please fill in your name, phone, a valid email, and a message of at least 10 characters.")
       return
     }
     setError(null)
@@ -36,7 +37,7 @@ export default function InquiryForm() {
           "form-name": "contact",
           name,
           email,
-          phone: String(data.get("phone") || ""),
+          phone,
           message,
         }),
       })
@@ -74,39 +75,53 @@ export default function InquiryForm() {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-ink mb-1">Name</label>
+          <label className="block text-sm font-medium text-ink mb-1">
+            Name <span className="text-red-500" aria-hidden="true">*</span>
+          </label>
           <input
             name="name"
             required
+            aria-required="true"
             className="w-full px-3 py-2.5 border border-brand-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-ink mb-1">Phone (optional)</label>
+          <label className="block text-sm font-medium text-ink mb-1">
+            Phone <span className="text-red-500" aria-hidden="true">*</span>
+          </label>
           <input
             name="phone"
             type="tel"
+            required
+            aria-required="true"
+            pattern="[+\d][\d\s\-]{6,}"
             className="w-full px-3 py-2.5 border border-brand-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-ink mb-1">Email</label>
+        <label className="block text-sm font-medium text-ink mb-1">
+          Email <span className="text-red-500" aria-hidden="true">*</span>
+        </label>
         <input
           name="email"
           type="email"
           required
+          aria-required="true"
           className="w-full px-3 py-2.5 border border-brand-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-ink mb-1">Message</label>
+        <label className="block text-sm font-medium text-ink mb-1">
+          Message <span className="text-red-500" aria-hidden="true">*</span>
+        </label>
         <textarea
           name="message"
           rows={4}
           required
+          aria-required="true"
           placeholder="Tell us what you need…"
           className="w-full px-3 py-2.5 border border-brand-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white resize-none"
         />
