@@ -80,33 +80,38 @@ export default function Header() {
       </div>
 
       {/* ── MOBILE DRAWER ───────────────────────────────────────── */}
-      {menuOpen && (
-        <nav className="md:hidden border-t border-white/10 bg-brand-900 px-4 py-4 flex flex-col gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="text-sm text-white/75 hover:text-white transition-colors py-2.5 border-b border-white/5 last:border-0"
-            >
-              {link.label}
-            </Link>
-          ))}
+      {/* Stays mounted (visibility toggled via class) rather than conditionally
+          unmounted, so DeliveryCheckModal keeps its own open state when
+          onTriggerClick closes this drawer. */}
+      <nav
+        className={`md:hidden border-t border-white/10 bg-brand-900 px-4 py-4 flex-col gap-1 ${
+          menuOpen ? "flex" : "hidden"
+        }`}
+      >
+        {navLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={() => setMenuOpen(false)}
+            className="text-sm text-white/75 hover:text-white transition-colors py-2.5 border-b border-white/5 last:border-0"
+          >
+            {link.label}
+          </Link>
+        ))}
 
-          <div className="flex flex-col gap-3 pt-4 mt-1 border-t border-white/10">
-            <DeliveryCheckModal onTriggerClick={() => setMenuOpen(false)} />
+        <div className="flex flex-col gap-3 pt-4 mt-1 border-t border-white/10">
+          <DeliveryCheckModal onTriggerClick={() => setMenuOpen(false)} />
 
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-brand-500 text-white text-sm font-semibold px-4 py-2.5 rounded-full w-fit hover:bg-brand-500/90 transition-colors"
-            >
-              Enquire on WhatsApp
-            </a>
-          </div>
-        </nav>
-      )}
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-brand-500 text-white text-sm font-semibold px-4 py-2.5 rounded-full w-fit hover:bg-brand-500/90 transition-colors"
+          >
+            Enquire on WhatsApp
+          </a>
+        </div>
+      </nav>
     </header>
   )
 }

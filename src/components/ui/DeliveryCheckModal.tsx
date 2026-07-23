@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import { createPortal } from "react-dom"
 
 type Result = {
   deliverable: boolean | null
@@ -106,7 +107,7 @@ export default function DeliveryCheckModal({ onTriggerClick }: { onTriggerClick?
         Check Delivery
       </button>
 
-      {open && (
+      {open && createPortal(
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleClose} />
 
@@ -211,7 +212,8 @@ export default function DeliveryCheckModal({ onTriggerClick }: { onTriggerClick?
               </p>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )
