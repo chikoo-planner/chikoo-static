@@ -95,7 +95,7 @@ export default function ShopPreview() {
                 </div>
 
                 <span className="inline-block text-xs font-semibold text-green-600">
-                  Save {bundle.savingsPercent}%
+                  Save {Math.round((bundle.savings / bundle.originalPrice) * 100)}%
                 </span>
               </motion.div>
             )

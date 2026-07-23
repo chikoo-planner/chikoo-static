@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import type { Product } from "@/data/products"
 
 /* Per-slot slide-in and fan-out config */
-type SlotCfg = { initial: object; fan: object }
+type AnimValues = Record<string, number | string>
+type SlotCfg = { initial: AnimValues; fan: AnimValues }
 
 function getSlotConfig(totalShown: number, i: number): SlotCfg {
   if (totalShown === 2) {
