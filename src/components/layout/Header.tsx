@@ -8,6 +8,7 @@ import { WHATSAPP_NUMBER } from "@/lib/constants"
 
 const navLinks = [
   { label: "Collections", href: "/collections" },
+  { label: "Shop", href: "/shop" },
   { label: "Testimonials", href: "/testimonials" },
   { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },

@@ -1,29 +1,34 @@
-// Edit this file to add/update/remove collections, then redeploy.
-// coverImage should point to a file in /public/images/collections/ (or an external URL).
 export type Collection = {
   slug: string
   name: string
   description: string
   coverImage: string | null
+  productIds: string[]
 }
 
 export const collections: Collection[] = [
   {
-    slug: "daily-planners",
-    name: "Daily Planners",
-    description: "Undated daily planners designed to help you plan with intention, one day at a time.",
-    coverImage: null,
+    slug: "planners",
+    name: "Planners",
+    description:
+      "Monthly, weekly, and study planners for students and professionals who plan with intention.",
+    coverImage: "/images/products/study-planner-1.jpeg",
+    productIds: ["monthly-planner", "weekly-planner", "study-planner"],
+  },
+  {
+    slug: "trackers",
+    name: "Trackers",
+    description:
+      "Habit and fitness trackers to help you build consistency and hit your health and lifestyle goals.",
+    coverImage: "/images/products/habit-tracker-1.jpeg",
+    productIds: ["habit-tracker", "fitness-tracker"],
   },
   {
     slug: "journals",
     name: "Journals",
-    description: "Fountain-pen friendly journals for reflection, gratitude, and creative writing.",
-    coverImage: null,
-  },
-  {
-    slug: "notepads-stationery",
-    name: "Notepads & Stationery",
-    description: "Everyday notepads, stickers, and accessories to keep your desk beautifully organised.",
-    coverImage: null,
+    description:
+      "Thoughtfully designed journals to help you reflect, unwind, and make the most of every evening.",
+    coverImage: "/images/products/bed-time-journal-2.jpeg",
+    productIds: ["bed-time-journal"],
   },
 ]

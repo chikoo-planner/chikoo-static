@@ -1,5 +1,6 @@
 import HeroSection from "@/components/home/HeroSection"
 import FeaturedCollections from "@/components/home/FeaturedCollections"
+import ShopPreview from "@/components/home/ShopPreview"
 import TestimonialsStrip from "@/components/home/TestimonialsStrip"
 import InstagramSection from "@/components/home/InstagramSection"
 import NewsletterSection from "@/components/home/NewsletterSection"
@@ -11,6 +12,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <FeaturedCollections collections={collections} />
+      <ShopPreview />
       <TestimonialsStrip testimonials={testimonials} />
       <InstagramSection />
       <NewsletterSection />
