@@ -1,13 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import dynamic from "next/dynamic"
+import { useState } from "react"
 import { motion } from "framer-motion"
 import type { Product } from "@/data/products"
 import { WHATSAPP_NUMBER } from "@/lib/constants"
+import AnimatedProductImage from "./AnimatedProductImage"
 
-const ProductCover = dynamic(() => import("./ProductCover"), { ssr: false })
+type Phase = "cover" | "photo"
 
 function DiscountBadge({ mrp, price }: { mrp: number; price: number }) {
   const pct = Math.round(((mrp - price) / mrp) * 100)
@@ -21,21 +20,22 @@ function DiscountBadge({ mrp, price }: { mrp: number; price: number }) {
 export default function ProductCard({
   product,
   index,
-  showPhotoFirst = true,
 }: {
   product: Product
   index: number
-  showPhotoFirst?: boolean
 }) {
-  const [showPhoto, setShowPhoto] = useState(showPhotoFirst)
-  const [activePhoto, setActivePhoto] = useState(0)
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => { setMounted(true) }, [])
+  const [override, setOverride] = useState<Phase | null>(null)
+  const [currentPhase, setCurrentPhase] = useState<Phase>("cover")
 
   const waText = encodeURIComponent(
     `Hi! I'm interested in the CHIKOO ${product.name} (₹${product.price}). Could you please share availability and ordering details?`
   )
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`
+
+  function handleToggle() {
+    const next: Phase = (override ?? currentPhase) === "photo" ? "cover" : "photo"
+    setOverride(next)
+  }
 
   return (
     <motion.div
@@ -48,53 +48,23 @@ export default function ProductCard({
     >
       {/* Image area */}
       <div className="relative aspect-[3/4] overflow-hidden bg-brand-50">
-        {showPhoto ? (
-          <>
-            <Image
-              src={product.images[activePhoto]}
-              alt={product.name}
-              fill
-              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
-              sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-            />
-            {/* Subtle gradient at bottom */}
-            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/30 to-transparent" />
-
-            {/* Dot navigation */}
-            {product.images.length > 1 && (
-              <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
-                {product.images.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActivePhoto(i)}
-                    aria-label={`Photo ${i + 1}`}
-                    className={`rounded-full transition-all duration-300 ${
-                      i === activePhoto ? "bg-white w-5 h-1.5" : "bg-white/60 w-1.5 h-1.5"
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
-          </>
-        ) : (
-          <div className="w-full h-full">
-            {mounted
-              ? <ProductCover productId={product.id} />
-              : <div className="w-full h-full bg-brand-50" />}
-          </div>
-        )}
+        <AnimatedProductImage
+          product={product}
+          override={override}
+          onPhaseChange={(p) => setCurrentPhase(p)}
+        />
 
         {/* Discount badge */}
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-3 left-3 z-10">
           <DiscountBadge mrp={product.mrp} price={product.price} />
         </div>
 
         {/* Toggle button */}
         <button
-          onClick={() => setShowPhoto(!showPhoto)}
-          className="absolute top-3 right-3 text-xs px-2.5 py-1 rounded-full bg-white/90 text-brand-700 border border-brand-200 shadow-sm hover:bg-white transition-colors backdrop-blur-sm"
+          onClick={handleToggle}
+          className="absolute top-3 right-3 z-10 text-xs px-2.5 py-1 rounded-full bg-white/90 text-brand-700 border border-brand-200 shadow-sm hover:bg-white transition-colors backdrop-blur-sm"
         >
-          {showPhoto ? "View Art" : "See Photo"}
+          {(override ?? currentPhase) === "photo" ? "View Art" : "See Photo"}
         </button>
       </div>
 

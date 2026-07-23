@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import type { Bundle } from "@/data/bundles"
 import type { Product } from "@/data/products"
 import { WHATSAPP_NUMBER } from "@/lib/constants"
-import BundleComboImage from "./BundleComboImage"
+import AnimatedBundleImage from "./AnimatedBundleImage"
 
 const tierStyles: Record<Bundle["tier"], { card: string; badge: string; button: string; savingsBg: string }> = {
   basic: {
@@ -81,7 +81,7 @@ export default function BundleCard({
 
       {/* Combo image */}
       <div className="px-3 pt-12 pb-2">
-        <BundleComboImage products={included} />
+        <AnimatedBundleImage products={included} />
       </div>
 
       {/* Content */}
